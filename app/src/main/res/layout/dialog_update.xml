@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    style="@style/Theme.MaterialComponents.DayNight.NoActionBar"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Update Note"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+
+    <TextView
+        app:layout_constraintBottom_toBottomOf="@id/etUpdateNote"
+        app:layout_constraintTop_toTopOf="@id/etUpdateNote"
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/tvNameLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Note"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
+
+    <EditText
+        android:layout_marginStart="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle"
+        app:layout_constraintStart_toEndOf="@id/tvNameLabel"
+        android:id="@+id/etUpdateNote"
+        android:textColor="@color/black"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Enter Name" />
+
+    <TextView
+        app:layout_constraintTop_toBottomOf="@id/etUpdateNote"
+        app:layout_constraintEnd_toStartOf="@id/tvCancel"
+        android:id="@+id/tvUpdate"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:foreground="?attr/selectableItemBackground"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="UPDATE"
+        android:textColor="@color/purple_200"
+        android:textStyle="bold" />
+
+    <TextView
+        app:layout_constraintTop_toBottomOf="@id/etUpdateNote"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/tvCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:foreground="?attr/selectableItemBackground"
+        android:gravity="center"
+        android:inputType="textEmailAddress"
+        android:padding="10dp"
+        android:text="CANCEL"
+        android:textColor="@android:color/black"
+        android:textStyle="bold" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
