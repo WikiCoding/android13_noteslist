@@ -36,6 +36,7 @@ import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.wikicoding.androidtodolistv2.adapter.MainActivityAdapter
+import com.wikicoding.androidtodolistv2.constants.Constants
 import com.wikicoding.androidtodolistv2.dao.TaskApp
 import com.wikicoding.androidtodolistv2.dao.TaskDao
 import com.wikicoding.androidtodolistv2.databinding.ActivityMainBinding
@@ -285,9 +286,19 @@ class MainActivity : AppCompatActivity() {
         adapter.setOnClick(object : MainActivityAdapter.OnClickList {
             override fun onClick(position: Int, model: TaskEntity) {
                 val indexOfClickedItem = list!!.indexOf(model)
-                println(list!![indexOfClickedItem])
+                val intent = Intent(applicationContext, TaskDetail::class.java)
+                intent.putExtra(Constants.INTENT_DATA, list!![indexOfClickedItem])
+                startActivity(intent)
+            }
+        })
+
+        adapter.setOnLongClick(object : MainActivityAdapter.OnLongClickedList {
+            override fun onLongClick(position: Int, model: TaskEntity) {
+                val indexOfClickedItem = list!!.indexOf(model)
+                //println("Long Press Item: ${list!![indexOfClickedItem]}")
                 updateTaskCompleted(list!![indexOfClickedItem])
             }
+
         })
     }
 

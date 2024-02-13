@@ -14,9 +14,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidTodoListV2">
         <activity
+            android:name=".TaskDetail"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity
             android:name=".MainActivity"
-            android:orientation="vertical"
-            android:exported="true">
+            android:exported="true"
+            android:orientation="vertical">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

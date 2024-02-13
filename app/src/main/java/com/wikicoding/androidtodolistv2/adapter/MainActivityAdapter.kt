@@ -16,6 +16,7 @@ class MainActivityAdapter(private val list: ArrayList<TaskEntity>) :
     RecyclerView.Adapter<MainActivityAdapter.AdapterVH>() {
 
     private var onClicked: OnClickList? = null
+    private var onLongClicked: OnLongClickedList? = null
 
     inner class AdapterVH(view: View) : RecyclerView.ViewHolder(view)
 
@@ -64,18 +65,25 @@ class MainActivityAdapter(private val list: ArrayList<TaskEntity>) :
         holder.itemView.setOnClickListener {
             if (onClicked != null) {
                 val indexClicked = list.indexOf(model)
-                model.completed = !list[indexClicked].completed
                 onClicked!!.onClick(indexClicked, model)
-
-                holder.itemView.findViewById<TextView>(R.id.titleTv)
-                    .setTextColor(Color.parseColor("#808080"))
-
-                holder.itemView.findViewById<TextView>(R.id.titleTv).paintFlags = holder.itemView
-                    .findViewById<TextView>(R.id.titleTv).paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
-
-                holder.itemView.findViewById<TextView>(R.id.timeTv).paintFlags = holder.itemView
-                    .findViewById<TextView>(R.id.timeTv).paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
             }
+        }
+
+        holder.itemView.setOnLongClickListener {
+            val indexClicked = list.indexOf(model)
+            model.completed = !list[indexClicked].completed
+            onLongClicked!!.onLongClick(position, model)
+
+            holder.itemView.findViewById<TextView>(R.id.titleTv)
+                .setTextColor(Color.parseColor("#808080"))
+
+            holder.itemView.findViewById<TextView>(R.id.titleTv).paintFlags = holder.itemView
+                .findViewById<TextView>(R.id.titleTv).paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+
+            holder.itemView.findViewById<TextView>(R.id.timeTv).paintFlags = holder.itemView
+                .findViewById<TextView>(R.id.timeTv).paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+
+            true
         }
     }
 
@@ -93,5 +101,13 @@ class MainActivityAdapter(private val list: ArrayList<TaskEntity>) :
 
     fun findSwipedItem(position: Int): TaskEntity {
         return list[position]
+    }
+
+    interface OnLongClickedList {
+        fun onLongClick(position: Int, model: TaskEntity)
+    }
+
+    fun setOnLongClick(onLongClicked: OnLongClickedList) {
+        this.onLongClicked = onLongClicked
     }
 }
